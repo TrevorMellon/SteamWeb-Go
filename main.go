@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -36,6 +37,9 @@ func CheckSettings() {
 		var s Settings
 		json.Unmarshal(body, &s)
 		appSettings = s
+		if s.SteamApiKey == "ADD-API-KEY-HERE" || s.SteamApiKey == "" {
+			fmt.Println("Please enter a steam api key to config.json!")
+		}
 	}
 }
 
