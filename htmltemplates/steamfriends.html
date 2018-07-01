@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>{{.Page.Title}}</title>
+		<meta name="description" content="{{.Page.Description}}">
+		<meta property="og:image" content="{{.Profile.Avatar.Large}}">
+		<meta property="og:description" content="{{.Page.Description}}">
+		<link rel="stylesheet" href="/js/myjquery-ui.css" />
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery-ui.min.js"></script>
+	</head>
+	<body style="background-color:black;background-attachment: fixed;background-size:cover;background-repeat:no-repeat;font-family: Lato;color:white;" align="center" background="/images/Background_Grey.jpg">
+	
+	<div style="margin:auto;width:800px;color:white;" align="center">
+		<div style="border-radius:50px;overflow:hidden;">
+			<a href="{{.Profile.Url}}" target="_blank"><img src="{{.Profile.Avatar.Large}}" style="border-radius:100px;overflow:hidden;"/></a>
+		</div>
+		<div>
+			<table style="height:20px;">
+			<tr>
+			<td>
+			<h1>{{.Page.Title}}</h1>
+			</td>
+			<td style="vertical-align:top;">
+			<div>
+				<ul id="menu" style="color:black;width:30px;">
+					<li>
+						<div>...</div>
+						<ul>
+							<li>
+								<div>Sort</div>
+								<ul>
+									<li><a href="/steam/user/{{.Profile.SteamID}}/friends/&sort=asc">Ascending</a></li>
+									<li><a href="/steam/user/{{.Profile.SteamID}}/friends/&sort=desc">Descending</a></li>
+									<li><a href="/steam/user/{{.Profile.SteamID}}/friends/">Unsorted</a></li>
+								</ul>
+							</li>
+							<li>
+								<div>Filter</div>
+								<ul>
+									<li>
+										<div>Profile</div>
+										<ul>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/public">Public</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/private">Private</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/friendsonly">Semi</a></li>
+										</ul>
+									</li>
+									<li>
+										<div>Status</div>
+										<ul>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/online">Online</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/offline">Offline</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/away">Away</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/friends/busy">Busy</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			</td>
+			</tr>
+			</table>
+		</div>
+
+	</div>
+	<div style="clear:both;"></div>
+	<div>
+		<table id="mastertable" border="0" style="border-collapse:collapse;width:98%;margin:12px;">
+		{{range $k, $f := $.Profile.Friends}}	
+			<tr>
+				
+				<td style="width:48px;">
+					<a href="{{$f.Url}}"  target="_blank"><img style="width:32px;height:32px;border-radius:16px;border:2px solid {{$f.StatusColor}};" src="{{$f.Avatar.Small}}" alt="{{$f.PersonaName}}"></a>
+				</td>
+				<td>{{$f.PersonaName}}</td>
+				<td>{{$f.FriendSinceStr}}</td>
+				<td style="width:100px;"><a href="/steam/user/{{$f.SteamID}}/friends/&sort=asc" style="color:white;" target="_blank">Inspect</a></td>
+				
+			</tr>
+		{{end}}		
+		</table>
+	</div>
+	<script>
+		
+		$(document).ready(function()
+		{
+			$( "#menu" ).menu();
+		  $("table#mastertable tr:even").css("background-color", "rgba(44, 60, 91, 0.55)");
+		  $("table#mastertable tr:odd").css("background-color", "rgba(54, 65, 86, 0.60)");
+		});
+	</script>
+	</body>
+	</html>

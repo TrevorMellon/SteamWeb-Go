@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title>{{.Page.Title}}</title>
+		<meta name="description" content="{{.Page.Description}}">
+		<meta property="og:image" content="{{.Profile.Avatar.Large}}">
+		<meta property="og:description" content="{{.Page.Description}}">
+		<link rel="stylesheet" href="/js/myjquery-ui.css" />
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery-ui.min.js"></script>
+	</head>
+	<body style="background-color:black;background-attachment: fixed;background-size:cover;background-repeat:no-repeat;font-family: Lato;color:white;" align="center" background="/images/Background_Grey.jpg">
+	
+	<div style="margin:auto;width:800px;color:white;" align="center">
+		<div style="border-radius:50px;overflow:hidden;">
+			<a href="{{.Profile.Url}}" target="_blank"><img src="{{.Profile.Avatar.Large}}" style="border-radius:100px;overflow:hidden;"/></a>
+		</div>
+		<div>
+			<table style="height:20px;">
+			<tr>
+			<td>
+			<h1>{{.Page.Title}}</h1>
+			</td>
+			<td style="vertical-align:top;">
+			<div>
+				<ul id="menu" style="color:black;width:30px;">
+					<li>
+						<div>...</div>
+						<ul>
+							<li>
+								<div>Sort</div>
+								<!--ul>
+									<li><a href="/steam/user/{{.Profile.SteamID}}/friends/&sort=asc">Ascending</a></li>
+									<li><a href="/steam/user/{{.Profile.SteamID}}/friends/&sort=desc">Descending</a></li>
+									<li><a href="/steam/user/{{.Profile.SteamID}}/friends/">Unsorted</a></li>
+								</ul-->
+							</li>
+							<li>
+								<div>Filter</div>
+								<ul>
+									<li>
+										<div>Time Played</div>
+										<ul>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games">All</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games/unplayed">Unplayed</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games/1hour">> 1 Hour</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games/2hour">> 2 Hour</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games/4hour">> 4 Hour</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games/8hour">> 8 Hour</a></li>
+											<li><a href="/steam/user/{{.Profile.SteamID}}/games/16hour">> 16 Hour</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			</td>
+			</tr>
+			</table>
+		</div>
+
+	</div>
+	<div style="clear:both;"></div>
+	<div>
+		<table id="mastertable" border="0" style="border-collapse:collapse;width:98%;margin:12px;">
+		{{range $k, $v := $.Games}}	
+			<tr>
+				
+				<td style="width:48px;">
+					
+					<img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{$v.AppID}}/{{$v.ImgIconUrl}}.jpg">
+				</td>
+				<td>{{$v.Name}}</td>
+				<td>{{$v.PlaytimeForever}}</td>
+				<td style="width:100px;">Inspect</td>
+				
+			</tr>
+		{{end}}		
+		</table>
+	</div>
+	<script>
+		
+		$(document).ready(function()
+		{
+			$( "#menu" ).menu();
+		  $("table#mastertable tr:even").css("background-color", "rgba(44, 60, 91, 0.55)");
+		  $("table#mastertable tr:odd").css("background-color", "rgba(54, 65, 86, 0.60)");
+		});
+	</script>
+	</body>
+	</html>
