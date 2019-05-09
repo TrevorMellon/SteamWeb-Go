@@ -9,7 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/TrevorMellon/SteamWebMySql-Go"
+	SteamMySql "github.com/TrevorMellon/SteamWebMySql-Go"
 )
 
 type Settings struct {
@@ -37,6 +37,7 @@ func CheckSettings() {
 		var s Settings
 		json.Unmarshal(body, &s)
 		appSettings = s
+		SteamMySql.DBSettings = appSettings.DatabaseSettings
 		if s.SteamApiKey == "ADD-API-KEY-HERE" || s.SteamApiKey == "" {
 			fmt.Println("Please enter a steam api key to config.json!")
 		}
