@@ -32,7 +32,7 @@ _ReSharper*/
 packages/
 
 src/**
-
-
+pkg/**
+/SteamWeb-Go
 /config.json
 /debug
